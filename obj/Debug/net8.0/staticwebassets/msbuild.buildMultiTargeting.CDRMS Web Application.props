@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\CDRMS Web Application.props" />
+</Project>
