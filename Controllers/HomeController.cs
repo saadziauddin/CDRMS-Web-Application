@@ -17,11 +17,14 @@ namespace CDRMS_Web_Application.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+            // Retrieve session values
+            var username = HttpContext.Session.GetString("FullName") ?? "N/A";
+            var email = HttpContext.Session.GetString("Email") ?? "N/A";
 
-        public IActionResult Privacy()
-        {
+            // Pass data to the view using ViewData or ViewModel
+            ViewData["Username"] = username;
+            ViewData["Email"] = email;
+
             return View();
         }
 

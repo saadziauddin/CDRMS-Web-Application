@@ -1,17 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using CDRMS_Web_Application.Models;
 
 namespace CDRMS_Web_Application.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<UsersModel> _signInManager;
+        private readonly UserManager<UsersModel> _userManager;
+
+        public AccountController(SignInManager<UsersModel> signInManager, UserManager<UsersModel> userManager)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+        }
+
+        /* private readonly SignInManager<IdentityUser> _signInManager;
 
         public AccountController(SignInManager<IdentityUser> signInManager)
         {
             _signInManager = signInManager;
-        }
+        }*/
 
         [HttpGet]
         public IActionResult Login()

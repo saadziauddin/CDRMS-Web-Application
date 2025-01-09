@@ -1,4 +1,4 @@
-﻿using CDRMS_Web_Application.Areas.Identity.Data;
+﻿using CDRMS_Web_Application.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
@@ -7,10 +7,10 @@ public static class SeedData
     public static async Task SeedRolesAndAdmin(IServiceProvider serviceProvider)
     {
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var userManager = serviceProvider.GetRequiredService<UserManager<UsersModel>>();
 
         // Seed Roles
-        var roles = new[] { "Admin", "User" };
+        var roles = new[] { "Admin", "Super User","User" };
         foreach (var role in roles)
         {
             if (!await roleManager.RoleExistsAsync(role))
@@ -25,14 +25,15 @@ public static class SeedData
         var adminUser = await userManager.FindByEmailAsync(adminEmail);
         if (adminUser == null)
         {
-            var user = new ApplicationUser
+            var user = new UsersModel
             {
                 FullName = adminName,
                 UserName = adminEmail,
                 Email = adminEmail,
                 EmailConfirmed = true,
+                IsFirstLogin = false,
+                PhoneNumberConfirmed = true,
                 LockoutEnabled = false,
-                AccessFailedCount = 0
             };
 
             var result = await userManager.CreateAsync(user, "Admin@123");

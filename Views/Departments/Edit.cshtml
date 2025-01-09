@@ -1,0 +1,29 @@
+﻿@model CDRMS_Web_Application.Models.DepartmentsModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4 text-2xl font-bold">Edit Department</h1>
+
+<form asp-action="Edit" class="rounded bg-white p-6 shadow-md">
+    <div asp-validation-summary="ModelOnly" class="mb-4 text-red-500"></div>
+    <input type="hidden" asp-for="DepartmentId" />
+    <div class="mb-4">
+        <label asp-for="DepartmentName" class="mb-1 block text-sm font-medium text-gray-700">Department Name</label>
+        <input asp-for="DepartmentName" class="w-full rounded border border-gray-300 px-4 py-2" />
+        <span asp-validation-for="DepartmentName" class="text-sm text-red-500"></span>
+    </div>
+    <div class="flex items-center space-x-4">
+        <a asp-action="Index" class="rounded bg-gray-400 px-4 py-2 text-white hover:bg-gray-300">Back to List</a>
+        <button type="submit" value="Save" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,18 @@
+﻿@model CDRMS_Web_Application.Models.DepartmentsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4 text-2xl font-bold">Department Details</h1>
+
+<div class="rounded bg-white p-6 shadow-md">
+    <div class="mb-4">
+        <div class="text-lg font-medium">Department Name: <span class="font-bold text-gray-700">@Html.DisplayFor(model => model.DepartmentName)</span></div>
+    </div>
+    <div class="flex items-center space-x-4">
+        <a asp-action="Edit" asp-route-id="@Model?.DepartmentId" class="text-blue-500 hover:underline">Edit</a>
+        <a asp-action="Index" class="text-gray-500 hover:underline">Back to List</a>
+    </div>
+</div>

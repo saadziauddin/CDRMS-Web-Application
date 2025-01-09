@@ -1,0 +1,30 @@
+﻿@model CDRMS_Web_Application.Models.TrunksModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4 text-2xl font-bold">Create Trunk</h1>
+
+<form asp-action="Create" class="rounded bg-white p-6 shadow-md">
+    <div asp-validation-summary="ModelOnly" class="mb-4 text-red-500"></div>
+    <div class="mb-5">
+        <label asp-for="DepartId" class="mb-3 block text-lg font-medium text-gray-700">Department ID</label>
+        <input asp-for="DepartId" class="w-full rounded border border-gray-300 px-4 py-2" placeholder="Enter Department ID" />
+        <span asp-validation-for="DepartId" class="text-sm text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="TrunkCode" class="mb-3 block text-lg font-medium text-gray-700">Trunk Code</label>
+        <input asp-for="TrunkCode" class="w-full rounded border border-gray-300 px-4 py-2" placeholder="Enter Trunk Code" />
+        <span asp-validation-for="TrunkCode" class="text-sm text-red-500"></span>
+    </div>
+    <div class="flex items-center space-x-4">
+        <a asp-action="Index" class="rounded bg-gray-400 px-4 py-2 text-white hover:bg-gray-300">Back to List</a>
+        <button type="submit" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Create</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

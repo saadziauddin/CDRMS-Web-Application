@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CDRMS_Web_Application.Models.DepartmentsModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mb-4 flex items-center justify-between">
+    <h1 class="text-2xl font-bold">Departments</h1>
+    <a asp-action="Create" class="inline-block rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600">
+        Create New
+    </a>
+</div>
+
+<table class="w-full table-auto border-collapse border border-gray-300">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="border border-gray-300 px-4 py-2 text-left">Department Name</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="hover:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">@Html.DisplayFor(modelItem => item.DepartmentName)</td>
+                <td class="flex space-x-4 border border-gray-300 px-4 py-2">
+                    <a asp-action="Edit" asp-route-id="@item.DepartmentId" class="text-blue-500 hover:text-blue-700">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    @* <a asp-action="Details" asp-route-id="@item.DepartmentId" class="text-green-500 hover:text-green-700">
+                        <i class="fas fa-info-circle"></i>
+                    </a> *@
+                    <a asp-action="Delete" asp-route-id="@item.DepartmentId" class="text-red-500 hover:text-red-700">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

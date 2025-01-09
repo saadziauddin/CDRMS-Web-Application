@@ -1,42 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Home";
+
+    var username = ViewData["Username"] as string;
+    var email = ViewData["Email"] as string;
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<div class="container-fluid mt-5">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <div class="welcome-container rounded p-4">
-                @* @Session["user_name"] *@
-                <h1 class="fw-bold text-primary">Welcome, <span class="text-dark"></span>User Name!</h1>
-                <p class="fs-5 text-secondary mt-3">Your personalized dashboard is here to make your day easier and more productive.</p>
-                <p class="fs-5 text-secondary">Let’s accomplish something amazing today!</p>
-            </div>
-        </div>
+<div class="flex h-screen items-center justify-center bg-gray-100">
+    <div class="rounded-lg bg-white p-8 shadow-lg transition-all hover:shadow-xl">
+        <h1 class="text-2xl font-bold text-purple-600">
+            Welcome, <span class="text-gray-800">@username</span>!
+        </h1>
+        <p class="mt-4 text-lg text-gray-600">Your personalized dashboard is here to make your day easier and more productive.</p>
+        <p class="mt-2 text-lg text-gray-600">Let’s accomplish something amazing today!</p>
     </div>
 </div>
-
-<!-- Custom Styles -->
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
-
-    .welcome-container {
-        background-color: #ffffff;
-        /* border-left: 6px solid #6a11cb;*/
-        transition: all 0.3s ease-in-out;
-    }
-
-        .welcome-container:hover {
-            transform: scale(1.02);
-        }
-
-    .text-primary {
-        color: #6a11cb !important;
-    }
-</style>

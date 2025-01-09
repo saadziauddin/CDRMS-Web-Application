@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CDRMS Web Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2a5c5c77953d63daf0f9244e62e00281f80525c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CDRMS Web Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CDRMS Web Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

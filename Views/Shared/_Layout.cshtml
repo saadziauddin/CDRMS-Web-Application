@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @* <meta name="csrf-token" content="@Antiforgery.GetAndStoreTokens(HttpContext).RequestToken" /> *@
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <title>@ViewData["Title"] - CDRMS - Pronet (Pvt.) Ltd</title>
 
@@ -18,11 +19,11 @@
 
     <div id="wrapper">
         <!-- Topbar -->
-        <nav class="bg-gradient-to-r from-gray-200 to-gray-300 shadow-md">
+        <nav class="sticky top-0 z-50 bg-gradient-to-r from-gray-200 to-gray-200 shadow-md">
             <div class="container mx-auto flex items-center justify-between px-4 py-2">
                 <!-- Left: Logo -->
-                <a class="flex items-center" href="@Url.Action("IndexAdmin", "Home")">
-                    <img src="/img/PronetLogo.png" alt="Logo" class="h-14 w-28 pl-5" />
+                <a class="flex items-center" asp-controller="Home" asp-action="Index">
+                    <img src="/img/PronetLogo.png" alt="Logo" class="h-20 w-40 pl-5" />
                 </a>
 
                 <!-- Center: Title -->
@@ -36,64 +37,80 @@
                         <img src="/img/DefaultProfile.png" alt="Profile Pic" class="border-2 h-12 w-12 rounded-full border-white" />
                     </button>
                     <ul id="dropdownMenu" class="absolute right-0 mt-2 hidden w-40 rounded-lg bg-white text-gray-700 shadow-md">
-                        <li><a class="block px-4 py-2 hover:bg-gray-100" href="@Url.Action("IndexAdmin", "Home")">Home</a></li>
-                        <li><a class="block px-4 py-2 hover:bg-gray-100" href="@Url.Action("Index", "Users")">Profile</a></li>
-                        <li><a class="block px-4 py-2 hover:bg-gray-100" href="@Url.Action("Login", "Home")">Logout</a></li>
+                        <li>
+                            <a class="block px-4 py-2 hover:bg-gray-100"
+                                asp-controller="Home"
+                                asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+                        @* <li>
+                            <a class="block px-4 py-2 hover:bg-gray-100"
+                               asp-area=""
+                               asp-page="/Users/Edit">
+                               Edit Profile
+                            </a>
+                        </li> *@
+                        @* <li>
+                            <a class="block px-4 py-2 hover:bg-gray-100"
+                               asp-area=""
+                               asp-page="/Account/Logout">
+                                Logout
+                            </a>
+                        </li> *@
+                        <li>
+                            <form method="post" asp-area="" asp-page="/Account/Logout" style="display:inline;">
+                                <button type="submit" class="block w-full px-4 py-2 text-left hover:bg-gray-100">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
 
         <!-- Sidebar -->
-        <nav class="fixed left-0 h-screen w-60 bg-gray-100 shadow-md">
+        <nav class="fixed left-0 h-screen w-60 overflow-y-auto bg-gray-50 shadow-lg">
             <ul class="top-[70px] space-y-2 pt-5">
-                <li>
-                    <a class="block px-6 py-3 font-semibold text-gray-700 hover:bg-blue-100 hover:text-blue-500" href="@Url.Action("IndexAdmin", "Home")">
-                        <i class="fas fa-home mr-2"></i>
-                        Home
+                <li class="border-b border-gray-200">
+                    <a class="border-l-4 block border-transparent px-6 py-3 font-semibold text-gray-800 hover:border-red-500 hover:bg-red-100 hover:text-red-600" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home mr-2"></i> Home
                     </a>
                 </li>
-                <li>
-                    <a class="block px-6 py-3 font-semibold text-gray-700 hover:bg-blue-100 hover:text-blue-500" href="@Url.Action("Index", "Users")">
-                        <i class="fas fa-users mr-2"></i>
-                        User Management
+                <li class="border-b border-gray-200">
+                    <a class="border-l-4 block border-transparent px-6 py-3 font-semibold text-gray-800 hover:border-red-500 hover:bg-red-100 hover:text-red-600" asp-controller="Users" asp-action="Index">
+                        <i class="fas fa-users mr-2"></i> User Management
                     </a>
                 </li>
-                <li>
-                    <a class="block px-6 py-3 font-semibold text-gray-700 hover:bg-blue-100 hover:text-blue-500" href="@Url.Action("Index", "Departments")">
-                        <i class="fas fa-building mr-2"></i>
-                        Department
+                <li class="border-b border-gray-200">
+                    <a class="border-l-4 block border-transparent px-6 py-3 font-semibold text-gray-800 hover:border-red-500 hover:bg-red-100 hover:text-red-600" asp-controller="Departments" asp-action="Index">
+                        <i class="fas fa-building mr-2"></i> Departments
                     </a>
                 </li>
-                <li>
-                    <a class="block px-6 py-3 font-semibold text-gray-700 hover:bg-blue-100 hover:text-blue-500" href="@Url.Action("Index", "Tariff")">
-                        <i class="fas fa-globe mr-2"></i>
-                        Tariffs
+                <li class="border-b border-gray-200">
+                    <a class="border-l-4 block border-transparent px-6 py-3 font-semibold text-gray-800 hover:border-red-500 hover:bg-red-100 hover:text-red-600" asp-controller="Trunks" asp-action="Index">
+                        <i class="fas fa-globe mr-2"></i> Trunks
                     </a>
                 </li>
-                <li>
-                    <a class="block px-6 py-3 font-semibold text-gray-700 hover:bg-blue-100 hover:text-blue-500" href="@Url.Action("Index", "Extensions")">
-                        <i class="fas fa-phone mr-2"></i>
-                        Extension
+                @* <li class="border-b border-gray-200">
+                    <a class="border-l-4 block border-transparent px-6 py-3 font-semibold text-gray-800 hover:border-red-500 hover:bg-red-100 hover:text-red-600"  asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-phone mr-2"></i> Extension
                     </a>
-                </li>
-                <li>
-                    <a class="block px-6 py-3 font-semibold text-gray-700 hover:bg-blue-100 hover:text-blue-500" href="@Url.Action("Index", "Trunks")">
-                        <i class="fas fa-network-wired mr-2"></i>
-                        Trunk
-                    </a>
-                </li>
-
-                <li>
-                    <button class="block flex w-full items-center px-6 py-3 text-left font-semibold text-gray-700 hover:bg-blue-100 hover:text-blue-500" data-bs-toggle="collapse" data-bs-target="#reportsSubMenu">
+                </li> *@
+                <li class="border-b border-gray-200">
+                    <button class="border-l-4 flex w-full border-transparent px-6 py-3 text-left font-semibold text-gray-800 hover:border-red-500 hover:bg-red-100 hover:text-red-600" data-bs-toggle="collapse" data-bs-target="#reportsSubMenu">
                         <i class="fas fa-chart-bar mr-2"></i> Reports
                         <i class="fas fa-chevron-down ml-auto"></i>
                     </button>
                     <ul class="ml-6 hidden space-y-2" id="reportsSubMenu">
-                        <li><a class="block px-4 py-2 hover:bg-gray-200" href="@Url.Action("CallsSummaryReport", "Reports")">Calls Summary Report</a></li>
-                        <li><a class="block px-4 py-2 hover:bg-gray-200" href="@Url.Action("CallDetailsReport", "Reports")">Call Detail Report</a></li>
-                        <li><a class="block px-4 py-2 hover:bg-gray-200" href="@Url.Action("TrunkWiseReport", "Reports")">Trunk-Wise Report</a></li>
-                        <li><a class="block px-4 py-2 hover:bg-gray-200" href="@Url.Action("TotalDurationCDRReport", "Reports")">Total Duration CDRs</a></li>
+                        <li class="border-b border-gray-200">
+                            <a class="block px-4 py-2 hover:border-l-4 hover:border-red-500 hover:bg-red-100 hover:text-red-600"  asp-controller="Home" asp-action="Index">CDR Detail Report</a>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <a class="block px-4 py-2 hover:border-l-4 hover:border-red-500 hover:bg-red-100 hover:text-red-600" asp-controller="Home" asp-action="Index">Reports</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -116,10 +133,21 @@
         document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
             button.addEventListener('click', () => {
                 const target = document.querySelector(button.getAttribute('data-bs-target'));
+                const icon = button.querySelector('.fas.fa-chevron-down'); // Select the chevron icon
+
+                // Toggle the visibility of the submenu
                 target.classList.toggle('hidden');
+
+                // Rotate the chevron icon based on the submenu's state
+                if (target.classList.contains('hidden')) {
+                    icon.classList.remove('rotate-180'); // Collapse state
+                } else {
+                    icon.classList.add('rotate-180'); // Expanded state
+                }
             });
         });
     </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>

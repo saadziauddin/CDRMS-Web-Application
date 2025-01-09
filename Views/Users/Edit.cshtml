@@ -1,0 +1,40 @@
+@model CDRMS_Web_Application.Models.UsersModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="mb-4 text-2xl font-bold">Edit Application User</h1>
+
+<form asp-action="Edit" class="rounded bg-white p-6 shadow-md">
+    <div asp-validation-summary="ModelOnly" class="mb-4 text-red-500"></div>
+
+    <div class="mb-5">
+        <label asp-for="FullName" class="mb-3 block text-lg font-medium text-gray-700">Full Name</label>
+        <input asp-for="FullName" class="w-full rounded border border-gray-300 px-4 py-2" placeholder="Enter Full Name" />
+        <span asp-validation-for="FullName" class="text-sm text-red-500"></span>
+    </div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-5">
+        <label asp-for="Email" class="mb-3 block text-lg font-medium text-gray-700">Email</label>
+        <input asp-for="Email" class="w-full rounded border border-gray-300 px-4 py-2" placeholder="Enter Email" />
+        <span asp-validation-for="Email" class="text-sm text-red-500"></span>
+    </div>
+
+    <div class="mb-5">
+        <label asp-for="PhoneNumber" class="mb-3 block text-lg font-medium text-gray-700">Phone Number</label>
+        <input asp-for="PhoneNumber" class="w-full rounded border border-gray-300 px-4 py-2" placeholder="Enter Phone Number" />
+        <span asp-validation-for="PhoneNumber" class="text-sm text-red-500"></span>
+    </div>
+
+    <div class="flex items-center space-x-4">
+        <a asp-action="Index" class="rounded bg-gray-400 px-4 py-2 text-white hover:bg-gray-300">Back to List</a>
+        <button type="submit" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Save</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
